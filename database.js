@@ -130,5 +130,11 @@ db.serialize(() => {
   assignments.forEach(a => stmtAsgn.run(a));
   stmtAsgn.finalize();
 
-  console.log("Database initialized with routes and starting times.");
+  db.run("SELECT 1", () => {
+    console.log("Database initialized with routes and starting times.");
+    db.close((err) => {
+      if (err) console.error(err.message);
+      process.exit(0);
+    });
+  });
 });
